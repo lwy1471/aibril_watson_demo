@@ -30,7 +30,6 @@ a:focus {
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-btn {
@@ -43,7 +42,7 @@ a:focus {
     width: 100%;
     height: 1px;
     border-bottom: 1px dashed #ddd;
-    margin: 40px 0;
+    margin: 20px 0;
 }
 
 i,
@@ -75,7 +74,8 @@ span {
 }
 
 #sidebar.active .sidebar-header h3,
-#sidebar.active .CTAs {
+#sidebar.active .CTAs,
+#sidebar.active .sidebar-header h5 {
     display: none;
 }
 
@@ -196,11 +196,25 @@ a.article:hover {
 
 #content {
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     min-height: 100vh;
     transition: all 0.3s;
 }
 
+#content .apis_content {
+    background: #dcdcdc;
+    margin: 10px;
+    min-height: 620px;
+    width: 100%;
+}
+
+.card-body {
+    padding: 0 15px 15px 10px;;
+}
+
+.card-body form-group col-form-label {
+    padding-bottom: calc(0.1rem +1px);
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
