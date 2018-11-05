@@ -7,8 +7,8 @@
     <title> Aibril Watson Demo </title>
     <link rel="shortcut icon" href={{ url_for('static',filename='img/favicon.ico') }}>
     
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename="css/bootstrap/bootstrap.css") }}>
+    <!-- Bootstrap CSS 
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename="css/bootstrap/bootstrap.css") }}>-->
     <!-- Bootswatch CSS -->
     <link rel="stylesheet" type="text/css" href={{ url_for('static', filename="css/bootstrap/bootswatch.css") }}>
     <!-- Our Custom CSS -->
@@ -90,9 +90,26 @@
             </nav>
             
             <div class="apis_content">
-            {% block content %}
-                
-            {% endblock %}
+                <div class="card text-white bg-secondary mb-3">
+                    <div class="card-header"><strong>Service Credential</strong></div>
+                  <div class="card-body">
+                        <div class="form-group">
+                            <div class="form-element">
+                                <label class="col-form-label" for="inputDefault">Username</label>
+                                <input type="text" class="form-control" placeholder="Username" id="inputDefault">
+                            </div>
+                            <div class="form-element">
+                                <label class="col-form-label" for="inputDefault">Password</label>
+                                <input type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <div class="form-element">
+                                <label class="col-form-label" for="inputDefault">Workspace ID</label>
+                                <input type="text" class="form-control" placeholder="Workspace ID">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary">인증 요청</button>
+                  </div>
+                </div>
             </div>
         </div>
     </div>

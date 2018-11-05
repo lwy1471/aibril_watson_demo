@@ -26,7 +26,6 @@ a:focus {
 
 .navbar {
     padding: 15px 10px;
-    background: #fff;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
@@ -36,6 +35,10 @@ a:focus {
     box-shadow: none;
     outline: none !important;
     border: none;
+}
+
+.bg-light {
+    background: none !important;
 }
 
 .line {
@@ -208,13 +211,41 @@ a.article:hover {
     width: 100%;
 }
 
-.card-body {
-    padding: 0 15px 15px 10px;;
+
+#content .form-group {
+    margin-bottom: 0px;
 }
 
-.card-body form-group col-form-label {
-    padding-bottom: calc(0.1rem +1px);
+#content .mb-3 {
+    max-width: 25rem;
 }
+
+#content .card-body {
+    padding: 10px 25px 10px 10px;
+}
+
+#content .card-body .form-group:nth-child(1) {
+    padding-top: 5px;
+    min-width: 120px;
+}
+
+#content .form-element {
+    display:flex;
+    align-items: center;
+    padding: 0 0 10px 0px;
+}
+
+#content .card-body .form-group .form-element .col-form-label {
+    padding-bottom: calc(0.1rem +1px);
+    min-width: 120px;
+}
+
+#content .card-body .btn-secondary{
+    float:right;
+}
+
+
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
