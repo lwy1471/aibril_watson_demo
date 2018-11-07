@@ -1,0 +1,53 @@
+{% extends "apis.html" %}
+{% block content %}
+    <div class="card text-white bg-secondary mb-3">
+        <div class="card-header"><strong>Service Credential</strong></div>
+        <div class="card-body">
+            <div class="form-group">
+                <div class="form-element">
+                    <label class="col-form-label" for="inputDefault">Username</label>
+                    <input id="assistUsername"type="text" class="form-control" placeholder="Username" id="inputDefault">
+                </div>
+                <div class="form-element">
+                    <label class="col-form-label" for="inputDefault">Password</label>
+                    <input id="assistPass" type="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-element">
+                    <label class="col-form-label" for="inputDefault">Workspace ID</label>
+                    <input id="workspaceId" type="text" class="form-control" placeholder="Workspace ID">
+                </div>
+            </div>
+            <button id="sc-request" type="button" class="btn btn-secondary">인증 요청</button>
+        </div>
+    </div>
+{% endblock %}	
+
+{% block script %}
+	<script>
+	$("#sc-request").click(function(){
+		username = $("#assistUsername").val();
+		password = $("#assistPass").val();
+		workspaceId = $("#workspaceId").val();
+
+		$.ajax({
+			url: "assistant/getService",
+			type: 'POST',
+			data: {
+				"username":username,
+				"password":password,
+				"workspaceId":workspaceId
+			},
+			dataType: 'html',
+			success : function(data) {
+				alert('Success : '+data);
+			},
+			error: function(){
+				alert('Error');
+			}
+		});
+		
+
+	});
+	</script>
+
+{% endblock %}
