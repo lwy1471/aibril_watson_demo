@@ -1,6 +1,9 @@
+#-*-coding: utf-8
+
 from flask import Flask, render_template, request, Response, Blueprint
+from application.services.assistant import Assistant
 import json
-#from decorators import *
+
 
 print('in controller')
 
@@ -15,9 +18,12 @@ def member_page():
 def hello():
 	return render_template('apis.html')
 
-@api_app.route('/apis/assistant_old')
-def assistant_old():
-    return render_template('assistant_test.html')
+    
+# Test 용
+@api_app.route('/apis/assistant_test')
+def assistant_test():
+    a = Assistant(username="2f27a362-a5da-4f9a-9877-7fdfb77b7942", password="22jeKRq4lkV1")
+    return "hi"
 
 @api_app.route('/apis/assistant')
 def assistant():
@@ -26,12 +32,11 @@ def assistant():
 @api_app.route('/apis/assistant/getService',methods=['GET','POST'])
 def assistantGetService():
     if (request.method=='POST'):
-        
         username = request.form['username']
         password = request.form['password']
         workspaceId = request.form['workspaceId']
         
       
-        return json.dumps(request.form)
+        return json.dumps(request.form, ensure_ascii=False)
     else:
         return "bye"
