@@ -1,28 +1,29 @@
-from application import app
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request, Response, Blueprint
 import json
 #from decorators import *
 
 print('in controller')
 
-@app.route("/member")
+api_app = Blueprint('api', __name__)
+
+@api_app.route("/member")
 #@login_required
 def member_page():
     return "member_page"
 
-@app.route('/apis/')
+@api_app.route('/apis/')
 def hello():
 	return render_template('apis.html')
 
-@app.route('/apis/assistant_old')
+@api_app.route('/apis/assistant_old')
 def assistant_old():
     return render_template('assistant_test.html')
 
-@app.route('/apis/assistant')
+@api_app.route('/apis/assistant')
 def assistant():
     return render_template('assistant.html')
     
-@app.route('/apis/assistant/getService',methods=['GET','POST'])
+@api_app.route('/apis/assistant/getService',methods=['GET','POST'])
 def assistantGetService():
     if (request.method=='POST'):
         
