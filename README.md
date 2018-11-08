@@ -6,7 +6,3 @@ A simple Aibril with IBM watson demo application.
 pip install -r "requirements.txt"
 
 
-Aibril_watson_demo
-SK HOLDINGS CO. Aibril with Watson Demo
-
-
