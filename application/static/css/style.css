@@ -205,10 +205,10 @@ a.article:hover {
 }
 
 #content .apis_content {
-    background: #dcdcdc;
     margin: 10px;
     min-height: 620px;
     width: 100%;
+	display: flex;
 }
 
 
@@ -216,8 +216,12 @@ a.article:hover {
     margin-bottom: 0px;
 }
 
+/*--
+card wrapper
+--*/
 #content .mb-3 {
     max-width: 25rem;
+	max-height: 15rem;
 }
 
 #content .card-body {
@@ -243,6 +247,24 @@ a.article:hover {
 #content .card-body .btn-secondary{
     float:right;
 }
+
+/* ---------------------------------------------------
+    CONTENT STYLE - chatbot-wrapper
+----------------------------------------------------- */
+
+.chatbot-wrapper {
+	margin-left: 150px;
+	float:right;
+	background: #dcdcdc;
+	width: 50%;
+	height: 700px;
+	
+}
+
+
+
+
+
 
 
 

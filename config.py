@@ -12,3 +12,6 @@ CSRF_ENABLED = True
 CSRF_SESSION_KEY = "secret"
 
 SECRET_KEY = "secret"
+
+class watson_config():
+    ASSISTANT_VERSION = "2018-02-16"

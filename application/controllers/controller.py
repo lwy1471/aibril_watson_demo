@@ -22,21 +22,24 @@ def hello():
 # Test 용
 @api_app.route('/apis/assistant_test')
 def assistant_test():
-    a = Assistant(username="2f27a362-a5da-4f9a-9877-7fdfb77b7942", password="22jeKRq4lkV1")
-    return "hi"
+    init = Assistant(version=None, username="2f27a362-a5da-4f9a-9877-7fdfb77b7942", password="22jeKRq4lkV1")
+    return ("True" if init.init_status else "False")
 
 @api_app.route('/apis/assistant')
 def assistant():
     return render_template('assistant.html')
     
-@api_app.route('/apis/assistant/getService',methods=['GET','POST'])
-def assistantGetService():
+@api_app.route('/apis/assistant/InitService',methods=['GET','POST'])
+def assistantInitService():
     if (request.method=='POST'):
-        username = request.form['username']
-        password = request.form['password']
-        workspaceId = request.form['workspaceId']
         
-      
+        init = Assistant(version=None, username=request.form['username'],\
+        password=request.form['password'],\
+        workspace_id=request.form['workspaceId'])
+        
+        status = True if init.init_status else False
+        if status:
+            return "hi"
         return json.dumps(request.form, ensure_ascii=False)
     else:
         return "bye"

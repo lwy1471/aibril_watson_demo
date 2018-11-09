@@ -20,17 +20,29 @@
             <button id="sc-request" type="button" class="btn btn-secondary">인증 요청</button>
         </div>
     </div>
+	<span class="chatbot-wrapper">
+			
+		
+	</span>
 {% endblock %}	
 
 {% block script %}
 	<script>
 	$("#sc-request").click(function(){
+	
+	
+		//for Test
+		username = '2f27a362-a5da-4f9a-9877-7fdfb77b7942';
+		password = '22jeKRq4lkV1';
+		workspaceId = '66a052f0-cc1b-492b-9b05-4a84b0b10fc8';		
+		
+		/* for real 
 		username = $("#assistUsername").val();
 		password = $("#assistPass").val();
 		workspaceId = $("#workspaceId").val();
-
+		*/
 		$.ajax({
-			url: "assistant/getService",
+			url: "assistant/InitService",
 			type: 'POST',
 			data: {
 				"username":username,
