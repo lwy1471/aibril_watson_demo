@@ -253,18 +253,38 @@ card wrapper
 ----------------------------------------------------- */
 
 .chatbot-wrapper {
-	margin-left: 150px;
+	margin-left: 80px;
+	margin-right: 50px;
 	float:right;
 	background: #dcdcdc;
 	width: 50%;
 	height: 700px;
-	
 }
 
+.chatbot-inner {
+	height: calc(100%-3px);
+	position: relative;
+	border-radius: 8px;
+	z-index:2;
+	box-shadow: 10px 10px 20px grey;
+}
+.chat-title {
+	background-color: #404040;
+	border-radius: 8px 8px 0 0;
+	height: 60px;
+}
+.chat-title-text {
+}
+.chat-body {
+	background-color: #f8f8f8;
+	height: 560px;
+}
+#chat-talk-Area {
 
-
-
-
+}
+.chat-input {
+	height: 10%;
+}
 
 
 
