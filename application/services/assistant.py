@@ -1,10 +1,9 @@
 from watson_developer_cloud import AssistantV1
 from watson_developer_cloud import WatsonApiException
-#from application.config import watson_config as config
+#from application.config import dev_config as config
 import json
 
 class Assistant:
-
     init_status=False
     def __init__(self, version, username, password, workspace_id, endpoint=None):
         self.username=username

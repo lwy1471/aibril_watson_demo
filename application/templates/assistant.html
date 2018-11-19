@@ -4,6 +4,8 @@
         <div class="card-header"><strong>Service Credential</strong></div>
         <div class="card-body">
             <div class="form-group">
+			
+			<!-- 실제 사용 
                 <div class="form-element">
                     <label class="col-form-label" for="inputDefault">Username</label>
                     <input id="assistUsername"type="text" class="form-control" placeholder="Username" id="inputDefault">
@@ -16,6 +18,21 @@
                     <label class="col-form-label" for="inputDefault">Workspace ID</label>
                     <input id="workspaceId" type="text" class="form-control" placeholder="Workspace ID">
                 </div>
+			-->
+			<!-- Test 용 -->
+				<div class="form-element">
+                    <label class="col-form-label" for="inputDefault">Username</label>
+                    <input id="assistUsername"type="text" class="form-control" placeholder="Username" id="inputDefault" value="2f27a362-a5da-4f9a-9877-7fdfb77b7942">
+                </div>
+                <div class="form-element">
+                    <label class="col-form-label" for="inputDefault">Password</label>
+                    <input id="assistPass" type="password" class="form-control" placeholder="Password" value="22jeKRq4lkV1">
+                </div>
+                <div class="form-element">
+                    <label class="col-form-label" for="inputDefault">Workspace ID</label>
+                    <input id="workspaceId" type="text" class="form-control" placeholder="Workspace ID" value="66a052f0-cc1b-492b-9b05-4a84b0b10fc8">
+                </div>
+				
             </div>
             <button id="sc-request" type="button" class="btn btn-secondary">인증 요청</button>
         </div>
@@ -41,17 +58,11 @@
 	<script>
 	$("#sc-request").click(function(){
 	
-	
-		//for Test
-		username = '2f27a362-a5da-4f9a-9877-7fdfb77b7942';
-		password = '22jeKRq4lkV1';
-		workspaceId = '66a052f0-cc1b-492b-9b05-4a84b0b10fc8';		
-		
-		/* for real 
+
 		username = $("#assistUsername").val();
 		password = $("#assistPass").val();
 		workspaceId = $("#workspaceId").val();
-		*/
+		
 		$.ajax({
 			url: "assistant/InitService",
 			type: 'POST',
@@ -64,8 +75,9 @@
 			success : function(data) {
 				alert('Success : '+data);
 			},
-			error: function(){
-				alert('Error');
+			error: function(xhr){
+				var err = JSON.parse(xhr.responseText);
+				alert('Error : ' + err.Message);
 			}
 		});
 		

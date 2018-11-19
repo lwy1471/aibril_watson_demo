@@ -1,6 +1,6 @@
-#-*-coding: utf-8
+#-*-coding: utf-8 -*-
 
-from flask import Flask, render_template, request, Response, Blueprint
+from flask import Flask, render_template, request, Response, Blueprint, flash, jsonify
 from application.services.assistant import Assistant
 import json
 
@@ -37,9 +37,17 @@ def assistantInitService():
         password=request.form['password'],\
         workspace_id=request.form['workspaceId'])
         
+        print(init.init_status)
         status = True if init.init_status else False
-        if status:
-            return "hi"
+        
+        
+        # Assistant Authorizing errror
+        if status==False:
+            data = {'Message':'Assistant Access is Denied : Invalid credentials'}
+            err_response = Response(json.dumps(data), status=403, mimetype='application/json')
+            return err_response
+            
+
         return json.dumps(request.form, ensure_ascii=False)
     else:
         return "bye"
