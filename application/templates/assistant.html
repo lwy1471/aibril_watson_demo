@@ -42,12 +42,12 @@
 			<div class="chat-title">
 				<p class="chat-title-text"><b>AIBRIL</b> Assistant</p>
 			</div>
-			<div class="chat-body">
+			<div id="chat-body" class="chat-body-disabled">
 				<div id="chat-talk-Area">
 				</div>
 			</div>
 			<div class="chat-input">
-				<input type="text" placeholder="질문을 입력하세요" id="input_message">
+				<input type="text" placeholder="질문을 입력하세요" id="input_message" disabled />
 			</div>
 		</div>	
 		
@@ -55,34 +55,6 @@
 {% endblock %}	
 
 {% block script %}
-	<script>
-	$("#sc-request").click(function(){
-	
-
-		username = $("#assistUsername").val();
-		password = $("#assistPass").val();
-		workspaceId = $("#workspaceId").val();
-		
-		$.ajax({
-			url: "assistant/InitService",
-			type: 'POST',
-			data: {
-				"username":username,
-				"password":password,
-				"workspaceId":workspaceId
-			},
-			dataType: 'html',
-			success : function(data) {
-				alert('Success : '+data);
-			},
-			error: function(xhr){
-				var err = JSON.parse(xhr.responseText);
-				alert('Error : ' + err.Message);
-			}
-		});
-		
-
-	});
-	</script>
+	<script src="{{url_for('static', filename='js/assistant.js')}}" type="text/javascript" ></script>
 
 {% endblock %}

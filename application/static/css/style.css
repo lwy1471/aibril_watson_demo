@@ -273,12 +273,21 @@ card wrapper
 	border-radius: 8px 8px 0 0;
 	height: 60px;
 }
+
 .chat-title-text {
+	
 }
+
+.chat-body-disabled {
+	background-color: rgba(0,0,0,0.05);
+	height: 560px;
+}
+
 .chat-body {
 	background-color: #f8f8f8;
 	height: 560px;
 }
+
 #chat-talk-Area {
 
 }
