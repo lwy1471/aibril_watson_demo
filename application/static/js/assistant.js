@@ -1,4 +1,6 @@
 $(document).ready(function () {
+	
+	// Get Service Credential Function.
 	$("#sc-request").click(function(){
 
 		username = $("#assistUsername").val();
@@ -18,6 +20,7 @@ $(document).ready(function () {
 				// change chat-body CSS
 				$("#chat-body").attr('class', 'chat-body');
 				$("#input_message").removeAttr("disabled");
+				$("#chat-input").attr('class', 'chat-input-enabled');
 				alert('Success : '+data);
 			},
 			error: function(xhr){
@@ -25,24 +28,41 @@ $(document).ready(function () {
 				// change chat-body CSS
 				$("#chat-body").attr('class', 'chat-body-disabled');
 				$("#input_message").attr('disabled', true);
+				$("#chat-input").attr('class', 'chat-input-disabled');
+				
 				alert('Error : ' + err.Message);
 			}
 		});
 		
 	});
 	
+	// Rendering Chatting Log.
+	function renderUserLog(msg) {
+		var chat = document.createElement('p');
+		chat.innerHTML=msg;
+		var chatLog = document.createElement('div');
+		chatLog.setAttribute('class', 'chat-user-log')
+		chatLog.appendChild(chat)
+
+		$('#chat-talk-area').append(chatLog)
+	}
+	
+	// Enter key function
 	$("#input_message").keydown(function(key) {
 		if (key.keyCode == 13) {
 			var msg = $("#input_message").val().trim();
 			
 			if(msg == null || msg == '') {
 				//console.log("Input text is nothing");
+				return null;
 			}
 			else {
 				//console.log("Enter pressed: "+msg);
-				$("input_message").val()=null;
+				$("#input_message").val('');
+				// render chat log
+				renderUserLog(msg);
 			}
-			
+			$("#chat-body").scrollTop(9999);
 		}
 	});
 

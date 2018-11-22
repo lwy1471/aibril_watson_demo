@@ -1,6 +1,6 @@
 {% extends "apis.html" %}
 {% block content %}
-    <div class="card text-white bg-secondary mb-3">
+    <div class="card bg-light mb-3">
         <div class="card-header"><strong>Service Credential</strong></div>
         <div class="card-body">
             <div class="form-group">
@@ -34,20 +34,21 @@
                 </div>
 				
             </div>
-            <button id="sc-request" type="button" class="btn btn-secondary">인증 요청</button>
+            <button id="sc-request" type="button" class="btn btn-primary">인증 요청</button>
         </div>
     </div>
 	<span class="chatbot-wrapper">
 		<div class="chatbot-inner">
 			<div class="chat-title">
-				<p class="chat-title-text"><b>AIBRIL</b> Assistant</p>
+				<h4 class="chat-title-text"> AIBRIL  <small class="text-muted"> Assistant</small> </h4>
 			</div>
 			<div id="chat-body" class="chat-body-disabled">
-				<div id="chat-talk-Area">
+				<div id="chat-talk-area">
 				</div>
 			</div>
-			<div class="chat-input">
-				<input type="text" placeholder="질문을 입력하세요" id="input_message" disabled />
+			<div id="chat-input" class="chat-input-disabled">
+				<input class="form-control" type="text" placeholder="질문을 입력하세요" id="input_message" disabled="" />
+				<div id="enter-button"></div>
 			</div>
 		</div>	
 		

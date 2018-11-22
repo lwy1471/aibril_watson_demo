@@ -13,7 +13,7 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #999;
+	margin-bottom: 0;
 }
 
 a,
@@ -244,7 +244,7 @@ card wrapper
     min-width: 120px;
 }
 
-#content .card-body .btn-secondary{
+#sc-request{
     float:right;
 }
 
@@ -256,13 +256,13 @@ card wrapper
 	margin-left: 80px;
 	margin-right: 50px;
 	float:right;
-	background: #dcdcdc;
 	width: 50%;
 	height: 700px;
 }
 
 .chatbot-inner {
-	height: calc(100%-3px);
+	max-width: 450px;
+	height: calc( 100% - 28px );
 	position: relative;
 	border-radius: 8px;
 	z-index:2;
@@ -275,26 +275,59 @@ card wrapper
 }
 
 .chat-title-text {
-	
+	color: #fff;
+	padding: 20px 0 0 20px;
 }
 
 .chat-body-disabled {
-	background-color: rgba(0,0,0,0.05);
+	background-color: rgba(0,0,0,0.1);
 	height: 560px;
 }
 
 .chat-body {
-	background-color: #f8f8f8;
+	background-color: #ecf0f1;
 	height: 560px;
+	overflow-y: auto;
+	padding-top: 10px;
 }
 
-#chat-talk-Area {
-
+.chat-user-log {
+	max-width: 200px;
+	list-style-type: none;
+	margin: 3px 5px 3px 3px;
+	padding: 8px 20px;
+	clear: both;
+	border-radius: 10px 10px 2px 2px ;
+	background: rgba(52, 152, 219, 0.39);
+	color: #3e3838;
+	float: right;
+	border-bottom-left-radius: 10px;
 }
-.chat-input {
-	height: 10%;
+
+.chat-input-disabled {
+	background-color: #ecf0f1;
 }
 
+.chat-input-enabled {
+	background-color: #fff;
+}
+
+#input_message {
+	width: calc( 100% - 45px );
+	height: 45px;
+	border: none;
+	display: inline-block;
+}
+
+#enter-button {
+	background: rgba(243,156,18,0.5) url(../img/ico_enter.png) no-repeat 7px 7px;
+    background-size: auto 23px;
+	border-radius: 50%;
+	width:40px;
+	height:40px;
+	float:right;
+	margin: 3px 3px 0 0;
+}
 
 
 /* ---------------------------------------------------
