@@ -267,6 +267,7 @@ card wrapper
 	border-radius: 8px;
 	z-index:2;
 	box-shadow: 10px 10px 20px grey;
+	
 }
 .chat-title {
 	background-color: #404040;
@@ -304,6 +305,27 @@ card wrapper
 	border-bottom-left-radius: 10px;
 }
 
+.chat-bot-log {
+	max-width: 200px;
+	list-style-type: none;
+	margin: 3px 5px 3px 3px;
+	padding: 8px 20px;
+	clear: both;
+	border-radius: 10px 10px 2px 2px ;
+	background: rgba(52, 152, 219, 0.39);
+	color: #3e3838;
+	float: left;
+	border-bottom-right-radius: 10px;
+}
+
+.chat-user-log p {
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+.chat-bot-log p {
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
 .chat-input-disabled {
 	background-color: #ecf0f1;
 }
@@ -314,7 +336,7 @@ card wrapper
 
 #input_message {
 	width: calc( 100% - 45px );
-	height: 45px;
+	height: 48px;
 	border: none;
 	display: inline-block;
 }

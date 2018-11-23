@@ -47,6 +47,20 @@ $(document).ready(function () {
 		$('#chat-talk-area').append(chatLog)
 	}
 	
+	function renderBotLog(response) {
+		var msg = response.text;
+		
+		var chat = document.createElement('p');
+		chat.innerHTML=msg;
+		var chatLog = document.createElement('div');
+		chatLog.setAttribute('class', 'chat-bot-log')
+		chatLog.appendChild(chat)
+
+		$('#chat-talk-area').append(chatLog)
+	}
+	
+	
+	
 	// Enter key function
 	$("#input_message").keydown(function(key) {
 		if (key.keyCode == 13) {
@@ -61,6 +75,25 @@ $(document).ready(function () {
 				$("#input_message").val('');
 				// render chat log
 				renderUserLog(msg);
+
+				// Ajax - send message to server.
+				$.ajax({
+					url: "assistant/sendMessage",
+					type: 'POST',
+					data: {
+							"text":msg
+						}
+					},
+					dataType: 'html',
+					success : function(data) {
+						renderBotLog(data);
+					},
+					error: function(xhr){
+						var err = JSON.parse(xhr.responseText);
+						alert('Error : ' + err.Message);
+					}
+				});
+				
 			}
 			$("#chat-body").scrollTop(9999);
 		}

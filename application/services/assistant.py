@@ -4,22 +4,23 @@ from watson_developer_cloud import WatsonApiException
 import json
 
 class Assistant:
-    init_status=False
+    init_status = False
+    assistant = None
+
     def __init__(self, version, username, password, workspace_id, endpoint=None):
         self.username=username
         self.password=password
         self.endpoint=endpoint
         self.version=version
         self.workspace_id=workspace_id
-        
+
         if(endpoint==None):
             self.endpoint="https://gateway.aibril-watson.kr/assistant/api"
         if(version==None):
             self.version="2018-02-16"
-        
+
         self.initial_call()
 
-    
     def initial_call(self):
         try:
             assistant = AssistantV1(version=self.version, username=self.username, password=self.password, url=self.endpoint)
@@ -29,6 +30,13 @@ class Assistant:
         except WatsonApiException as ex:
             print("Method failed with status code {} : {}".format(str(ex.code),ex.message))
             self.init_status=False
+
+
+    def send_message(self, message):
+        payload = {'text': message}
+        response = assistant.message(workspace_id, input=payload).get_result()
+
+        print(json.dumps(response, indent=2))
         
 
 """
