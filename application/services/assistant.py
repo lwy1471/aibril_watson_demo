@@ -4,6 +4,7 @@ from watson_developer_cloud import WatsonApiException
 import json
 
 class Assistant:
+    
     init_status = False
     assistant = None
 
@@ -19,26 +20,32 @@ class Assistant:
         if(version==None):
             self.version="2018-02-16"
 
-        self.initial_call()
-
-    def initial_call(self):
         try:
-            assistant = AssistantV1(version=self.version, username=self.username, password=self.password, url=self.endpoint)
-            response = assistant.message(workspace_id=self.workspace_id, input={'text': ''})
-
+            self.assistant = AssistantV1(version=self.version, username=self.username, password=self.password, url=self.endpoint)
+        except WatsonApiException as ex:
+            print("Method failed with status code {} : {}".format(str(ex.code),ex.message))
+        
+    def initial_message(self):
+        try:
+            response = self.assistant.message(workspace_id=self.workspace_id, input={'text':''}).get_result()
+            #print( json.dumps(response, indent=2, ensure_ascii=False) )
             self.init_status=True
+            return response
         except WatsonApiException as ex:
             print("Method failed with status code {} : {}".format(str(ex.code),ex.message))
             self.init_status=False
 
 
-    def send_message(self, message):
-        payload = {'text': message}
-        response = assistant.message(workspace_id, input=payload).get_result()
+    def sendMessage(self, message, context=[]):
+        try:
+            userInput = {'text': message}
+            response = self.assistant.message(workspace_id=self.workspace_id, input=userInput, context=context).get_result()
 
-        print(json.dumps(response, indent=2))
-        
+            return response
 
+        except WatsonApiException as ex:
+            print("Method failed with status code {} : {}".format(str(ex.code),ex.message))
+            return False
 """
 {
 "url" : "https://gateway.aibril-watson.kr/assistant/api",

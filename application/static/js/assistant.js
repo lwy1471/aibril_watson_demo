@@ -8,7 +8,7 @@ $(document).ready(function () {
 		workspaceId = $("#workspaceId").val();
 		
 		$.ajax({
-			url: "assistant/InitService",
+			url: "assistant/initService",
 			type: 'POST',
 			data: {
 				"username":username,
@@ -21,7 +21,12 @@ $(document).ready(function () {
 				$("#chat-body").attr('class', 'chat-body');
 				$("#input_message").removeAttr("disabled");
 				$("#chat-input").attr('class', 'chat-input-enabled');
-				alert('Success : '+data);
+				
+				console.log(typeof(data));
+				resText = data['text'];
+				console.log(resText);
+				alert('Success : '+resText);
+				renderBotLog(resText);
 			},
 			error: function(xhr){
 				var err = JSON.parse(xhr.responseText);
@@ -80,12 +85,9 @@ $(document).ready(function () {
 				$.ajax({
 					url: "assistant/sendMessage",
 					type: 'POST',
-					data: {
-							"text":msg
-						}
-					},
+					data: {"text":msg},
 					dataType: 'html',
-					success : function(data) {
+					success: function(data) {
 						renderBotLog(data);
 					},
 					error: function(xhr){
