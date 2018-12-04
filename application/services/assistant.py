@@ -1,13 +1,12 @@
 from watson_developer_cloud import AssistantV1
 from watson_developer_cloud import WatsonApiException
-#from application.config import dev_config as config
 import json
 
 class Assistant:
-    
-    init_status = False
-    assistant = None
 
+    assistant = None
+    status = False
+    
     def __init__(self, version, username, password, workspace_id, endpoint=None):
         self.username=username
         self.password=password
@@ -18,34 +17,37 @@ class Assistant:
         if(endpoint==None):
             self.endpoint="https://gateway.aibril-watson.kr/assistant/api"
         if(version==None):
-            self.version="2018-02-16"
-
-        try:
+            self.version="2018-02-20"
+        try :
             self.assistant = AssistantV1(version=self.version, username=self.username, password=self.password, url=self.endpoint)
-        except WatsonApiException as ex:
-            print("Method failed with status code {} : {}".format(str(ex.code),ex.message))
-        
+        except:
+            pass
+        else:
+            self.status = True
+
+
     def initial_message(self):
         try:
             response = self.assistant.message(workspace_id=self.workspace_id, input={'text':''}).get_result()
-            #print( json.dumps(response, indent=2, ensure_ascii=False) )
-            self.init_status=True
             return response
-        except WatsonApiException as ex:
-            print("Method failed with status code {} : {}".format(str(ex.code),ex.message))
-            self.init_status=False
+        except:
+            self.status=False
+            return False
+        else:
+            self.status = True
 
-
-    def sendMessage(self, message, context=[]):
+    def sendMessage(self, userText, userContext):
         try:
-            userInput = {'text': message}
-            response = self.assistant.message(workspace_id=self.workspace_id, input=userInput, context=context).get_result()
+            userJson = {'text': userText}
+            response = self.assistant.message(workspace_id=self.workspace_id, input=userJson, context=userContext).get_result()
 
             return response
 
         except WatsonApiException as ex:
             print("Method failed with status code {} : {}".format(str(ex.code),ex.message))
             return False
+        else:
+            self.status = True
 """
 {
 "url" : "https://gateway.aibril-watson.kr/assistant/api",

@@ -292,7 +292,9 @@ card wrapper
 	padding-top: 10px;
 }
 
-.chat-user-log {
+
+
+.chat-log-user {
 	max-width: 200px;
 	list-style-type: none;
 	margin: 3px 5px 3px 3px;
@@ -305,25 +307,27 @@ card wrapper
 	border-bottom-left-radius: 10px;
 }
 
-.chat-bot-log {
-	max-width: 200px;
+.chat-log-bot {
+	max-width: 300px;
 	list-style-type: none;
-	margin: 3px 5px 3px 3px;
+	margin: 3px 5px 3px 5px;
 	padding: 8px 20px;
 	clear: both;
 	border-radius: 10px 10px 2px 2px ;
-	background: rgba(52, 152, 219, 0.39);
+	background: rgba(255, 228, 0, 0.57);
 	color: #3e3838;
 	float: left;
 	border-bottom-right-radius: 10px;
 }
 
-.chat-user-log p {
+.chat-log-user p {
 	font-family: 'Nanum Gothic', sans-serif;
+	font-size: 0.9rem;
 }
 
-.chat-bot-log p {
+.chat-log-bot p {
 	font-family: 'Nanum Gothic', sans-serif;
+	font-size: 0.9rem;
 }
 
 .chat-input-disabled {

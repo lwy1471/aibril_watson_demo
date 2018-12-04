@@ -1,13 +1,17 @@
 #-*-coding: utf-8 -*-
 
-from flask import Flask, render_template, request, Response, Blueprint, flash, jsonify, session, make_response
+from flask import Flask, render_template, request, Response, Blueprint, flash, jsonify, session
 from application.services.assistant import Assistant
 import json
-from application.services.common import json_response
+from application.services.common import *
+
 
 print('in controller')
 
+
+
 class ApiContoller:
+ 
     api_app = Blueprint('apis', __name__, template_folder="templates", static_folder="static")
 
     @api_app.route('/')
@@ -23,43 +27,45 @@ class ApiContoller:
         assistantModel = Assistant(version=None, username=request.form['username'],\
         password=request.form['password'],\
         workspace_id=request.form['workspaceId'])
-        init = assistantModel.initial_message()
+        initRes=assistantModel.initial_message()
         
-        welcomeMsg = init['output']['text']
-        
-        status = True if assistantModel.init_status else False      
-        # Assistant Authorizing errror
-        """
-        if status==False:
-            data = {'Message':'Assistant Access is Denied : Invalid credentials'}
-            err_response = Response(json.dumps(data), status=403, mimetype='application/json')
-            return err_response
-        """
+        if(assistantModel.status!=False):
+            welcomeMsg = initRes['output']['text']
 
-        #Set Session
-        session['username'] = request.form['username']
-        session['password'] = request.form['password']
-        session['workspaceId'] = request.form['workspaceId']
+            #Set Session
+            session['username'] = request.form['username']
+            session['password'] = request.form['password']
+            session['workspaceId'] = request.form['workspaceId']
+            session['context'] = None
 
-        resData = {'text':'인증에 성공하였습니다.', 'welcomeMsg': welcomeMsg}
-        res = make_response(json.dumps(resData))
-        res.headers['Content-type'] = 'application/json'
-        return res
+            resData = {'text':'인증에 성공하였습니다.', 'welcomeMsg': welcomeMsg}
+            
+            return response_200(resData)
+        else:
+            print('Service authorizing Error')
+            errMsg = {'err':"서비스 인증에 실패하였습니다."}
+            return response_500(errMsg)
 
 
     @api_app.route('/assistant/sendMessage',methods=['POST'])
-    @json_response
     def sendMessage():
-
         assistantModel = Assistant(version=None, username=session['username'],\
         password=session['password'],\
         workspace_id=session['workspaceId'])
         
-        userInput = request.form['text']
-        context = request.form['context']
-        resData = assistantModel.sendMessage(userInput, context)
+        if(assistantModel.status!=False):
+            #Set Context Session
+            session['context'] = request.form['context']
+            
+            userInput = request.form['text']
+            
+            if len(request.form['context'])==0:
+                session['context'] = {}
+
+            resData = assistantModel.sendMessage(userInput, session['context'])
+            return response_200(resData)
+        else:
+            errMsg = "서비스 인증에 실패하였습니다."
+            return response_500(errMsg)       
         
-        res = make_response(json.dumps(resData, ensure_ascii=False))
-        res.headers['Content-type'] = 'application/json'
-        print(json.dumps(resData, indent=2, ensure_ascii=False))
-        return res
+
