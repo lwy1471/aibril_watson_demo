@@ -1,0 +1,49 @@
+<nav id="sidebar">
+	<div class="sidebar-header">
+		<h3>AIBRIL</h3> <h5>with Watson Demo</h5>
+		<strong>AI</strong>
+	</div>
+
+	<ul class="list-unstyled components">
+		<li class="active">
+			<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+				<i class="fas fa-home"></i>
+				서비스
+			</a>
+			<ul class="collapse list-unstyled" id="homeSubmenu">
+				<li>
+					<a href="{{url_for('service.assistant')}}">Assistant</a>
+				</li>
+				<li>
+					<a href="#">Assistant, Discovery</a>
+				</li>
+				<li>
+					<a href="#">Assistant, Discovery, TTS</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="#">
+				<i class="fas fa-briefcase"></i>
+				About
+			</a>
+			<!--
+			<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+				<i class="fas fa-copy"></i>
+				Pages
+			</a>
+			<ul class="collapse list-unstyled" id="pageSubmenu">
+				<li>
+					<a href="#">Page 1</a>
+				</li>
+				<li>
+					<a href="#">Page 2</a>
+				</li>
+				<li>
+					<a href="#">Page 3</a>
+				</li>
+			</ul>
+			-->
+		</li>
+	</ul>
+</nav>

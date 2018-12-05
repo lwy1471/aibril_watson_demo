@@ -25,8 +25,8 @@ $(document).ready(function () {
 
 				resText = data['text'];
 				alert(resText);
-				botChat = {'output':{'text':data['welcomeMsg']}};
-				renderBotLog(botChat);
+				botData = {'output':{'text':data['welcomeMsg']}};
+				chat_render('bot',botData);
 			},
 			error: function(xhr){
 				var err = JSON.parse(xhr.responseText);
@@ -40,30 +40,6 @@ $(document).ready(function () {
 		});
 		
 	});
-	
-	// Rendering Chatting Log.
-	function renderUserLog(msg) {
-		var chat = document.createElement('p');
-		chat.innerHTML=msg;
-		var chatLog = document.createElement('div');
-		chatLog.setAttribute('class', 'chat-log-user')
-		chatLog.appendChild(chat)
-
-		$('#chat-talk-area').append(chatLog)
-	}
-	
-	function renderBotLog(response) {
-		var text = response['output']['text'];
-		var chat = document.createElement('p');
-		chat.innerHTML=text;
-		var chatLog = document.createElement('div');
-		chatLog.setAttribute('class', 'chat-log-bot')
-		chatLog.appendChild(chat)
-
-		$('#chat-talk-area').append(chatLog)
-		
-	}
-	
 	
 	
 	// Enter key function
@@ -79,8 +55,8 @@ $(document).ready(function () {
 				//console.log('Enter pressed: '+msg);
 				$('#input_message').val('');
 				//render chat log
-				renderUserLog(msg);
-				
+				msgData = {'text':msg};
+				chat_render('user',msgData);
 				//set request Data
 				reqData = {'text':msg, 'context':dialogContext};
 				
@@ -92,7 +68,7 @@ $(document).ready(function () {
 					data: reqData,
 					dataType: 'json',
 					success: function(data) {
-						renderBotLog(data);
+						chat_render('bot',data);
 						dialogContext = JSON.stringify(data['context']);
 						document.getElementById('chat-body').scrollTo(0, 9999)
 					},

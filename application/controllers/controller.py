@@ -8,20 +8,16 @@ from application.services.common import *
 
 print('in controller')
 
-
-
 class ApiContoller:
  
-    api_app = Blueprint('apis', __name__, template_folder="templates", static_folder="static")
+    api_app = Blueprint('service', __name__, template_folder="templates", static_folder="static")
 
-    @api_app.route('/')
-    def hello():
-        return render_template('apis.html')
-
+    # Assistant Page
     @api_app.route('/assistant')
     def assistant():
         return render_template('assistant.html')
     
+    # Assistant Auth Page
     @api_app.route('/assistant/initService',methods=['POST'])
     def assistantInitService():
         assistantModel = Assistant(version=None, username=request.form['username'],\

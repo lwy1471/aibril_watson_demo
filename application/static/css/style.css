@@ -289,7 +289,7 @@ card wrapper
 	background-color: #ecf0f1;
 	height: 560px;
 	overflow-y: auto;
-	padding-top: 10px;
+	padding: 10px 5px;
 }
 
 
@@ -297,7 +297,7 @@ card wrapper
 .chat-log-user {
 	max-width: 200px;
 	list-style-type: none;
-	margin: 3px 5px 3px 3px;
+	margin: 5px 0px;
 	padding: 8px 20px;
 	clear: both;
 	border-radius: 10px 10px 2px 2px ;
@@ -310,14 +310,19 @@ card wrapper
 .chat-log-bot {
 	max-width: 300px;
 	list-style-type: none;
-	margin: 3px 5px 3px 5px;
+	margin: 5px 0px;
 	padding: 8px 20px;
 	clear: both;
 	border-radius: 10px 10px 2px 2px ;
 	background: rgba(255, 228, 0, 0.57);
 	color: #3e3838;
-	float: left;
 	border-bottom-right-radius: 10px;
+}
+
+.chat-log-bot img{
+	width:100%;
+	height:auto;
+	padding: 2px 2px;
 }
 
 .chat-log-user p {
@@ -328,6 +333,13 @@ card wrapper
 .chat-log-bot p {
 	font-family: 'Nanum Gothic', sans-serif;
 	font-size: 0.9rem;
+}
+
+#chat-log-bot-list {
+	min-width: 45%;
+	overflow-y: auto;
+	display: block;
+	background-color:#fff;
 }
 
 .chat-input-disabled {
