@@ -41,6 +41,27 @@ $(document).ready(function () {
 		
 	});
 	
+	var sendMessage = function(sender, reqData) {
+		console.log(reqData);
+		// Ajax - send message to server.
+		return $.ajax({
+			url: 'assistant/sendMessage',
+			type: 'POST',
+			//contentType: 'application/json',
+			data: reqData,
+			dataType: 'json',
+			async: false,
+			success: function(response) {
+				chat_render(sender, response);
+				dialogContext = JSON.stringify(response['context']);
+			},
+			error: function(xhr){
+				var err = JSON.parse(xhr.responseText);
+				alert('Error : ' + err.Message);
+			}
+		});
+	}
+	
 	
 	// Enter key function
 	$('#input_message').keydown(function(key) {
@@ -56,32 +77,24 @@ $(document).ready(function () {
 				$('#input_message').val('');
 				//render chat log
 				msgData = {'text':msg};
-				chat_render('user',msgData);
+				chat_render('user', msgData);
 				//set request Data
 				reqData = {'text':msg, 'context':dialogContext};
-				
-				// Ajax - send message to server.
-				$.ajax({
-					url: 'assistant/sendMessage',
-					type: 'POST',
-					//contentType: 'application/json',
-					data: reqData,
-					dataType: 'json',
-					success: function(data) {
-						chat_render('bot',data);
-						dialogContext = JSON.stringify(data['context']);
-						document.getElementById('chat-body').scrollTo(0, 9999)
-					},
-					error: function(xhr){
-						var err = JSON.parse(xhr.responseText);
-						alert('Error : ' + err.Message);
-					}
-				});
-				
+				sendMessage('user', reqData);
+
+				document.getElementById('chat-body').scrollTo(0, 9999);
 			}
 		}
 	});
-
-
-
+	
+	// Add Event Listener on chat-bot-list response.
+	$(document).on("click",".btn btn-outline-secondary", (function(listData){
+	
+		var msg = listData['input_text']
+		var msgData = {'text':msg};
+		chat_render('user',msgData);
+		
+		reqData = {'text':msg, 'context':dialogContext};
+		sendMessage('user', reqData);
+	}));
 });

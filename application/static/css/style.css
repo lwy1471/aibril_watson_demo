@@ -340,6 +340,7 @@ card wrapper
 	overflow-y: auto;
 	display: block;
 	background-color:#fff;
+	margin: 2px 0px;
 }
 
 .chat-input-disabled {

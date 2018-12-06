@@ -22,7 +22,7 @@ function chat_render(chatter,data) {
 	
 }
 
-// 데이터 종류에 따라 보여줄 것에 대한 업데이트 필요
+// bot rendering function
 function renderBotLog(data) {
 
 	var chatLog = create_bot_div();
@@ -33,7 +33,6 @@ function renderBotLog(data) {
 
 
 	if(data['context'] && data['context']['render']) {
-		
 		for (var cnt in data['context']['render']) {
 			var render = data['context']['render'][cnt];
 			switch (render['type']) {
@@ -50,6 +49,7 @@ function renderBotLog(data) {
 				case 'list':
 					if(!render['textlist'])
 						continue;
+					
 					for (var cnt in render['textlist']) {
 						text = render['textlist'][cnt];
 						var list = document.createElement('button');
@@ -65,5 +65,4 @@ function renderBotLog(data) {
 		}
 		
 	}
-	
 }
