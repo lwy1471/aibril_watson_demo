@@ -42,7 +42,6 @@ $(document).ready(function () {
 	});
 	
 	var sendMessage = function(sender, reqData) {
-		console.log(reqData);
 		// Ajax - send message to server.
 		return $.ajax({
 			url: 'assistant/sendMessage',
@@ -52,12 +51,35 @@ $(document).ready(function () {
 			dataType: 'json',
 			async: false,
 			success: function(response) {
-				chat_render(sender, response);
+				renderResults = chat_render('bot', response)
+				
+				if(renderResults)	{
+					if(renderResults['type'] == 'list') {
+						console.log(renderResults);
+						for(var i in renderResults['list']) {
+							let candidate = renderResults['list'][i];
+							candidate.addEventListener("click", (function(){
+								var msg = candidate.innerHTML;
+								var msgData = {'text':msg};
+								console.log(msgData);
+								chat_render('user',msgData);
+
+								reqData = {'text':msg, 'context':dialogContext};
+								console.log(reqData);
+								sendMessage('user', reqData);
+							}));
+							console.log(candidate);
+						}
+					}
+				}
 				dialogContext = JSON.stringify(response['context']);
 			},
 			error: function(xhr){
 				var err = JSON.parse(xhr.responseText);
 				alert('Error : ' + err.Message);
+			},
+			complete: function() {
+				document.getElementById('chat-body').scrollTo(0, 9999);
 			}
 		});
 	}
@@ -77,24 +99,16 @@ $(document).ready(function () {
 				$('#input_message').val('');
 				//render chat log
 				msgData = {'text':msg};
-				chat_render('user', msgData);
+				renderResults = chat_render('user', msgData)
+				
 				//set request Data
 				reqData = {'text':msg, 'context':dialogContext};
 				sendMessage('user', reqData);
-
 				document.getElementById('chat-body').scrollTo(0, 9999);
 			}
 		}
 	});
 	
 	// Add Event Listener on chat-bot-list response.
-	$(document).on("click",".btn btn-outline-secondary", (function(listData){
 	
-		var msg = listData['input_text']
-		var msgData = {'text':msg};
-		chat_render('user',msgData);
-		
-		reqData = {'text':msg, 'context':dialogContext};
-		sendMessage('user', reqData);
-	}));
 });
